@@ -17,15 +17,15 @@ pool:
 
 variables:
   terraformVersion: '1.6.6'
-  workingDir: '$(System.DefaultWorkingDirectory)'
+  workingDirectory: '$(System.DefaultWorkingDirectory)'
 
 stages:
-  - stage: TerraformValidation
+  - stage: Terraform_CI
     displayName: 'Terraform Init Fmt Validate Plan'
 
     jobs:
-      - job: TerraformJob
-        displayName: 'Terraform CI'
+      - job: Terraform_Job
+        displayName: 'Terraform Pipeline'
 
         steps:
           - checkout: self
@@ -42,7 +42,7 @@ stages:
             inputs:
               provider: 'azurerm'
               command: 'init'
-              workingDirectory: $(workingDir)
+              workingDirectory: $(workingDirectory)
               backendServiceArm: 'sumsungprojectservcon'
 
           # Terraform Format Check
@@ -51,7 +51,7 @@ stages:
             inputs:
               provider: 'azurerm'
               command: 'custom'
-              workingDirectory: $(workingDir)
+              workingDirectory: $(workingDirectory)
               customCommand: 'fmt -check -recursive'
 
           # Terraform Validate
@@ -60,7 +60,7 @@ stages:
             inputs:
               provider: 'azurerm'
               command: 'validate'
-              workingDirectory: $(workingDir)
+              workingDirectory: $(workingDirectory)
 
           # Terraform Plan
           - task: TerraformTaskV4@4
@@ -68,5 +68,5 @@ stages:
             inputs:
               provider: 'azurerm'
               command: 'plan'
-              workingDirectory: $(workingDir)
+              workingDirectory: $(workingDirectory)
               environmentServiceNameAzureRM: 'sumsungprojectservcon'
