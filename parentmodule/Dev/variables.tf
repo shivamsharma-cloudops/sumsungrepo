@@ -1,4 +1,4 @@
 variable "rgs" {}
 variable "stsg" {}
 variable "vnets" {}
-variable "snets" {}
+variable "snet" {}
