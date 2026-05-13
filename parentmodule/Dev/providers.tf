@@ -5,6 +5,12 @@ terraform {
       version = "4.72.0"
     }
   }
+  backend "azurerm" {
+    resource_group_name  = "sumsungrg"
+    storage_account_name = "sumsumgstg1"
+    container_name       = "sumsungblob"
+    key                  =  "dev.terraform.tfstate"
+  }
 }
 
 provider "azurerm" {
