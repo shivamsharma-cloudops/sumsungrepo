@@ -15,3 +15,9 @@ module "azurerm_virtual_network" {
   vnets      = var.vnets
 
 }
+
+module "azurerm_subnet" {
+  depends_on = [module.azurerm_virtual_network]
+  source     = "../../childmodule/Subnet"
+  snets      = var.snets
+}
