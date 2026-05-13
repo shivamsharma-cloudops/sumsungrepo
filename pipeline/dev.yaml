@@ -1,0 +1,17 @@
+#   branch // pr// schedule triggers
+trigger: none
+pool: sumsungprojectagentpool
+stages:
+- stage: inittoplanstage
+  displayName: init to plan stages 
+  jobs:
+  - job: terraforminstall
+    displayName: terraform installer 
+    steps:
+    - task: TerraformInstaller@1
+      inputs:
+        terraformVersion: 'latest'
+        
+      
+
+    
